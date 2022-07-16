@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const db = require('../database/connection')
 
 var schema = new mongoose.Schema({
     fullName : {
@@ -11,9 +12,9 @@ var schema = new mongoose.Schema({
         unique: true
     },
     mobile : String,
-    city : String
+    password : String
 })
 
-const Userdb = mongoose.model('userdb', schema);
+const OSBAdmin = db.model('OSBAdmin', schema);
 
-module.exports = Userdb;
+module.exports = OSBAdmin;
