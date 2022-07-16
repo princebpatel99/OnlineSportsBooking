@@ -3,10 +3,9 @@ const dotenv = require('dotenv');
 const app = express();
 const cors = require('cors');
 dotenv.config( { path : 'config.env'} );
-
 const bodyparser = require('body-parser');
-
-const OBSAdmin = require('./server/controller/OBSAdmin');
+const OSBRegister = require('./server/controller/OSBRegister');
+const sendEmail = require('./server/controller/sendEmail');
 
 const PORT = process.env.PORT || 8080;
 
@@ -25,4 +24,5 @@ app.use(cors({
     origin: '*'
 }));
 
-app.use('/api/OBSAdmin',OBSAdmin)
+app.use('/api/OSBRegister',OSBRegister);
+app.use('/api/sendEmail',sendEmail);

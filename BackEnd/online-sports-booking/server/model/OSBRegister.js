@@ -12,9 +12,13 @@ var schema = new mongoose.Schema({
         unique: true
     },
     mobile : String,
-    password : String
+    password : String,
+    gender:String,
+    isVarified:Boolean,
+    status:String,
+    role:String
 })
 
-const OSBAdmin = db.model('OSBAdmin', schema);
+const OSBAdmin = db.model('OSBRegister', schema);
 
 module.exports = OSBAdmin;
