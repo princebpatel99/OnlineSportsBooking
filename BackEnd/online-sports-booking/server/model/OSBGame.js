@@ -3,7 +3,7 @@ const db = require('../database/connection')
 
 var schema = new mongoose.Schema({
     noOfPlayers : {
-        type : Date,
+        type : Number,
         required: true
     },
     category : String,

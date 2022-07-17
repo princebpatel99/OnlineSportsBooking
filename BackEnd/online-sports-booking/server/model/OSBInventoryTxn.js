@@ -7,8 +7,8 @@ var schema = new mongoose.Schema({
         required: true
     },
     qty : String,
-    purchaseDate : String,
-    returnDate : String,
+    purchaseDate : Date,
+    returnDate : Date,
     CreatedBy:Object,
     Created:Date,
     ModifiedBy:Object,
