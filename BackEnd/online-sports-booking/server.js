@@ -6,7 +6,7 @@ dotenv.config( { path : 'config.env'} );
 const bodyparser = require('body-parser');
 const OSBRegister = require('./server/controller/OSBRegister');
 const sendEmail = require('./server/controller/sendEmail');
-
+const OSBInventory = require('./server/controller/OSBInventory');
 const PORT = process.env.PORT || 8080;
 
 app.use(bodyparser.urlencoded({
@@ -26,3 +26,4 @@ app.use(cors({
 
 app.use('/api/OSBRegister',OSBRegister);
 app.use('/api/sendEmail',sendEmail);
+app.use('/api/OSBInventory',OSBInventory)

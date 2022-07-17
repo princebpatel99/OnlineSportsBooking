@@ -9,9 +9,9 @@ var schema = new mongoose.Schema({
     qty : Number,
     Invoice : String,
     DateOfPurchase : Date,
-    CreatedBy:String,
+    CreatedBy:Object,
     Created:Date,
-    ModifiedBy:String,
+    ModifiedBy:Object,
     Modified:Date
 })
 
