@@ -1,13 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Route, Link, BrowserRouter as Router, Routes } from "react-router-dom";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Login from './User/Login';
+import Dashboard from './Admin/Dashboard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+export default function Routing() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<App/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/dashboard" element={<Dashboard/>} />
+      </Routes>
+    </Router>
+  );
+}
+
 root.render(
   <>
-    <App />
+    <Routing />
   </>
 );
 
