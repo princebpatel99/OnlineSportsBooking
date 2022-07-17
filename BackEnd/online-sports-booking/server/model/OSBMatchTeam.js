@@ -12,9 +12,9 @@ var schema = new mongoose.Schema({
     tournamentId:String,
     tournamentName:String,
     result:String,
-    CreatedBy:String,
+    CreatedBy:Object,
     Created:Date,
-    ModifiedBy:String,
+    ModifiedBy:Object,
     Modified:Date
 })
 

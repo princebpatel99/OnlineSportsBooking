@@ -2,18 +2,16 @@ const mongoose = require('mongoose');
 const db = require('../database/connection')
 
 var schema = new mongoose.Schema({
-    name : {
+    Title : {
         type : String,
         required: true
     },
-    capacity : Number,
-    suitedFor : String,
-    CreatedBy:String,
+    CreatedBy:Object,
     Created:Date,
-    ModifiedBy:String,
+    ModifiedBy:Object,
     Modified:Date
 })
 
-const OBSGround = db.model('OBSGround', schema);
+const OBSSports = db.model('OBSSports', schema);
 
-module.exports = OBSGround;
+module.exports = OBSSports;

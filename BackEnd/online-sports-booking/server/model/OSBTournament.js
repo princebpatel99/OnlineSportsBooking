@@ -9,9 +9,9 @@ var schema = new mongoose.Schema({
     Sport : String,
     noOfTeam : Number,
     dateOfTournament : Date,
-    CreatedBy:String,
+    CreatedBy:Object,
     Created:Date,
-    ModifiedBy:String,
+    ModifiedBy:Object,
     Modified:Date
 })
 

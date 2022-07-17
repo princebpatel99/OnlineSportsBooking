@@ -10,9 +10,9 @@ var schema = new mongoose.Schema({
     teamName : String,
     playerName : String,
     status:String,
-    CreatedBy:String,
+    CreatedBy:Object,
     Created:Date,
-    ModifiedBy:String,
+    ModifiedBy:Object,
     Modified:Date
 })
 
