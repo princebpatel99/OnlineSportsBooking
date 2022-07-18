@@ -4,7 +4,7 @@ export default class Test extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log("Constructor")
+    console.log("Constructor");
 
   }
 
