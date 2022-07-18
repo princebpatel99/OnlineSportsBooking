@@ -8,6 +8,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     console.log("Constructor")
+    console.log(this.myFunction());
 
   }
 
@@ -69,6 +70,10 @@ export default class App extends React.Component {
     // console.log("postData", postData);
   }
 
+  myFunction(){
+    return "Hello World";
+  }
+
   render() {
     return (
       <div className="App">
@@ -87,6 +92,7 @@ export default class App extends React.Component {
           </a>
         </header>
       </div>
+      
     );
   }
 }

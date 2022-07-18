@@ -1,7 +1,6 @@
 import React from 'react';
-import Test from './Test';
 
-export default class Login extends React.Component {
+export default class Test extends React.Component {
 
   constructor(props) {
     super(props);
@@ -13,8 +12,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className="App">
-        <Test/>
-        <h1>Login Page</h1>
+        <h1>Test Page</h1>
       </div>
     );
   }
