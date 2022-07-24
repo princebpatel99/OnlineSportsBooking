@@ -20,15 +20,29 @@ var schTeam = new mongoose.Schema({
     Modified: Date
 });
 
+var schTimeTable = new mongoose.Schema({
+    teamOne: schTeam,
+    teamTwo: schTeam,
+    ground:String,
+    StartDate:Date,
+    EndDate:Date,
+    WinningTeam:schTeam,
+    CreatedBy: Object,
+    Created: Date,
+    ModifiedBy: Object,
+    Modified: Date
+});
+
 var schema = new mongoose.Schema({
     TournamentName: {
         type: String,
         required: true
     },
-    Sport: String,
+    Sport: Object,
     startDate: Date,
     endDate: Date,
     team:[schTeam],
+    schedule:[schTimeTable],
     CreatedBy: Object,
     Created: Date,
     ModifiedBy: Object,

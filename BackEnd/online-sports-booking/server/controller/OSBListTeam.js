@@ -33,21 +33,23 @@ router.get('/:id/:team', async (req, res) => {
     if (loginDetails._id) {
         if (req.headers.authorization === process.env.Authorization) {
 
-            OSBTournament.find({ _id: req.params.id }, function (err, data) {
-                if (!err) {
-                    var newObj = new OSBTournament(data[0]);
-                    let result = [];
-                    newObj.team.forEach(function (a) {
-                        if (a._id == req.params.team) {
-                            result.push(a);
-                        }
-                    });
-                    res.send(JSON.stringify(result));
-                }
-                else {
-                    res.send(JSON.stringify({ isSuccess: false, message: err.toString() }))
-                }
-            });
+            // OSBTournament.find({ _id: req.params.id }, function (err, data) {
+            //     if (!err) {
+            //         var newObj = new OSBTournament(data[0]);
+            //         let result = [];
+            //         newObj.team.forEach(function (a) {
+            //             if (a._id == req.params.team) {
+            //                 result.push(a);
+            //             }
+            //         });
+            //         res.send(JSON.stringify(result));
+            //     }
+            //     else {
+            //         res.send(JSON.stringify({ isSuccess: false, message: err.toString() }))
+            //     }
+            // });
+            let output = await findTeamByID(req.params.id,req.params.team);
+            res.send(output);
 
 
         }
@@ -158,4 +160,27 @@ router.delete('/:id/:team', async (req, res) => {
     }
 });
 
-module.exports = router;
+async function findTeamByID(id, teamID) {
+    return new Promise(function (resolve, reject) {
+        try {
+            OSBTournament.find({ _id: id }, function (err, data) {
+                if (!err) {
+                    var newObj = new OSBTournament(data[0]);
+                    let result = [];
+                    newObj.team.forEach(function (a) {
+                        if (a._id == teamID) {
+                            result.push(a);
+                        }
+                    });
+                    resolve(JSON.stringify(result));
+                }
+                else {
+                    resolve(JSON.stringify({ isSuccess: false, message: err.toString() }));
+                }
+            });
+        } catch (err) {
+            resolve({})
+        }
+    });
+}
+module.exports = { router, findTeamByID };

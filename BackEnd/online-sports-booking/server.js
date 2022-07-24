@@ -18,6 +18,7 @@ const OSBSlotBook = require('./server/controller/OSBSlotBook');
 const OSBSports = require('./server/controller/OSBSports');
 const OSBTournament = require('./server/controller/OSBTournament');
 const sendEmail = require('./server/controller/sendEmail');
+const OSBTimeTable = require('./server/controller/OSBTimeTable');
 
 const PORT = process.env.PORT || 8080;
 
@@ -40,7 +41,7 @@ app.use('/api/OSBGame',OSBGame);
 app.use('/api/OSBGround',OSBGround);
 app.use('/api/OSBInventory',OSBInventory);
 app.use('/api/OSBInventoryTxn',OSBInventoryTxn);
-app.use('/api/OSBListTeam',OSBListTeam);
+app.use('/api/OSBListTeam',OSBListTeam.router);
 app.use('/api/OSBMatchTeam',OSBMatchTeam);
 app.use('/api/OSBRegister',OSBRegister);
 app.use('/api/OSBSlotBook',OSBSlotBook);
@@ -48,3 +49,4 @@ app.use('/api/OSBSports',OSBSports);
 app.use('/api/OSBTournament',OSBTournament);
 app.use('/api/OSBPlayers',OSBPlayers);
 app.use('/api/sendEmail',sendEmail);
+app.use('/api/OSBTimeTable',OSBTimeTable)
