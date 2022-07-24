@@ -9,11 +9,11 @@ function getDetails(id){
                 resolve(newObj)
             }
             else{
-                reject(new Error('Something is not right!'))
+                resolve({})
             }
           });
         } catch (err) {
-          reject(new Error('Something is not right!'));
+          resolve({})
         }
     });
 }
