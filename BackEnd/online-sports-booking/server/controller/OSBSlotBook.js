@@ -147,8 +147,8 @@ async function bookASlot(From, To, fromTime, totime, Ground, Sports, Status, Boo
 
             obj.save((err, doc) => {
                 if (!err) {
-                    var json = JSON.stringify(doc);
-                    resolve(json);
+                    // var json = JSON.stringify(doc);
+                    resolve(JSON.stringify({ isSuccess: true, message: "Successfully Booked a slot" }));
                 }
                 else {
                     resolve(JSON.stringify({ isSuccess: false, message: err.toString() }));
