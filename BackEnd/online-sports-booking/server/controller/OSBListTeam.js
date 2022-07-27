@@ -32,26 +32,8 @@ router.get('/:id/:team', async (req, res) => {
     let loginDetails = await loginUser.getDetails(req.headers.loginuser)
     if (loginDetails._id) {
         if (req.headers.authorization === process.env.Authorization) {
-
-            // OSBTournament.find({ _id: req.params.id }, function (err, data) {
-            //     if (!err) {
-            //         var newObj = new OSBTournament(data[0]);
-            //         let result = [];
-            //         newObj.team.forEach(function (a) {
-            //             if (a._id == req.params.team) {
-            //                 result.push(a);
-            //             }
-            //         });
-            //         res.send(JSON.stringify(result));
-            //     }
-            //     else {
-            //         res.send(JSON.stringify({ isSuccess: false, message: err.toString() }))
-            //     }
-            // });
             let output = await findTeamByID(req.params.id,req.params.team);
             res.send(output);
-
-
         }
         else {
             res.send(JSON.stringify({ isSuccess: false, message: 'Authorization Token is not Valid' }))

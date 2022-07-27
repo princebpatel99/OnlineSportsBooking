@@ -1,20 +1,18 @@
+
 const mongoose = require('mongoose');
 const db = require('../database/connection')
 
 var schema = new mongoose.Schema({
-    Date : {
-        type : Date,
-        required: true
-    },
-    From : String,
-    To : String,
+    FromDate : Date,
+    ToDate : Date,
+    FromTime:String,
+    ToTime:String,
     GroundName : String,
     Sports:String,
     Status:String,
     BookBy:String,
     isTournament:Boolean,
     tournamentID:String,
-    MatchId:String,
     totalPeople:Number,
     CreatedBy:Object,
     Created:Date,

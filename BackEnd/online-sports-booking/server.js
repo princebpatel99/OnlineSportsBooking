@@ -37,16 +37,26 @@ app.use(cors({
     origin: '*'
 }));
 
-app.use('/api/OSBGame',OSBGame);
-app.use('/api/OSBGround',OSBGround);
+
+app.use('/api/OSBRegister',OSBRegister);
+
 app.use('/api/OSBInventory',OSBInventory);
 app.use('/api/OSBInventoryTxn',OSBInventoryTxn);
-app.use('/api/OSBListTeam',OSBListTeam.router);
-app.use('/api/OSBMatchTeam',OSBMatchTeam);
-app.use('/api/OSBRegister',OSBRegister);
+
 app.use('/api/OSBSlotBook',OSBSlotBook);
-app.use('/api/OSBSports',OSBSports);
+
+app.use('/api/OSBGame',OSBGame);
+app.use('/api/OSBGround',OSBGround);
+
 app.use('/api/OSBTournament',OSBTournament);
+app.use('/api/OSBListTeam',OSBListTeam.router);
 app.use('/api/OSBPlayers',OSBPlayers);
-app.use('/api/sendEmail',sendEmail);
 app.use('/api/OSBTimeTable',OSBTimeTable)
+// app.use('/api/OSBMatchTeam',OSBMatchTeam);
+
+
+app.use('/api/OSBSports',OSBSports);
+
+
+app.use('/api/sendEmail',sendEmail);
+
