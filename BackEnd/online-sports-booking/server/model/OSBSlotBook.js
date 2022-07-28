@@ -10,7 +10,7 @@ var schema = new mongoose.Schema({
     GroundName : String,
     Sports:String,
     Status:String,
-    BookBy:String,
+    BookBy:Object,
     isTournament:Boolean,
     tournamentID:String,
     totalPeople:Number,

@@ -1,15 +1,16 @@
 import React from 'react';
 import { Calendar, globalizeLocalizer } from 'react-big-calendar'
 import globalize from 'globalize';
-import Modal from 'react-modal';
-import { FetchData } from '../RestAPI/database'
+// import Modal from 'react-modal';
+import { FetchData } from '../RestAPI/database';
+import PopUp from '../Components/PopUp';
 require('react-big-calendar/lib/css/react-big-calendar.css');
 
 
 
 
 
-// Modal.setAppElement('#yourAppElement');
+
 const localizer = globalizeLocalizer(globalize)
 
 export default class CalendarPage extends React.Component {
@@ -25,7 +26,7 @@ export default class CalendarPage extends React.Component {
             ground: null,
             sports:null
         }
-
+        this.getData = this.getData.bind(this);
     }
 
     async componentDidMount(){
@@ -37,11 +38,19 @@ export default class CalendarPage extends React.Component {
         let arr = [];
         x.forEach((element,id)=>{
             arr.push({id: id,
-                title: element.GroundName,
+                title: "Ground Name : "+element.GroundName,
                 start: new Date(element.FromDate),
-                end: new Date(element.ToDate)})
+                end: new Date(element.ToDate),
+                ...element
+            },
+                )
         })
         this.setState({events:arr});
+    }
+
+    formatDate(date,time){
+        let temp = new Date(date);
+        return temp.getDate() + "/"+ (temp.getMonth()+1) +"/"+ temp.getFullYear() + " "+time;
     }
     async bookSlot(){
         let fromDate = new Date(this.state.fromDate);
@@ -59,9 +68,15 @@ export default class CalendarPage extends React.Component {
             tournamentID : "",
             totalPeople : ""
         }
-        var x = await FetchData("/api/OSBSlotBook","POST",body)
+        var x = await FetchData("/api/OSBSlotBook","POST",body);
+        if(x.isSuccess){
+            await this.getData();
+        }
+        else{
+            alert(x.message)
+        }
         this.setState({isModalOpen:false})
-        await this.getData();
+        
     }
 
     render() {
@@ -77,50 +92,19 @@ export default class CalendarPage extends React.Component {
           };
         return (
             <div>
+                <PopUp callback={this.getData}/>
                 <Calendar
                     localizer={localizer}
                     events={this.state.events}
                     startAccessor="start"
+                    onSelectEvent={(e)=>{console.log(e)}}
                     endAccessor="end"
+                    defaultView={"week"}
                     style={{ height: 700 }}
                 />
-                <a href="#" onClick={()=>{this.setState({isModalOpen:true})}}>Book Slot</a>
-                <Modal id="yourAppElement"
-                    isOpen={this.state.isModalOpen}
-                    onRequestClose={()=>{this.setState({isModalOpen:false})}}
-                    subtitle="Example Modal"
-                    style={customStyles}
-                    contentLabel="Example Modal"
-                >
-                   
-                    <h2>Book a Slot</h2>
-                    <label>From Date</label>
-                    <input type="datetime-local" onChange={(e)=>{this.setState({fromDate:e.target.value})}}/>
-                    <label>To Date</label>
-                    <input type="datetime-local" onChange={(e)=>{this.setState({toDate:e.target.value})}}/>
-                    <br/>
-                    <label>Ground</label>
-                    <select onChange={(e)=>{
-                        this.setState({ground:e.target.value})}}>
-                        <option disabled selected>Select Garden</option>
-                        <option>Ground 1</option>
-                        <option>Ground 2</option>
-                        <option>Ground 3</option>
-                        <option>Ground 4</option>
-                    </select>
-
-                    <label>Sports</label>
-                    <select onChange={(e)=>{this.setState({sports:e.target.value})}}>
-                        <option disabled selected>Select Sports</option>
-                        <option>Sports 1</option>
-                        <option>Sports 2</option>
-                        <option>Sports 3</option>
-                        <option>Sports 4</option>
-                    </select>
-
-                    <br/>
-                    <input type="submit" value="Book a slot" onClick={()=>{this.bookSlot()}}/>
-                </Modal>
+                
+                
+                
             </div>
         );
     }

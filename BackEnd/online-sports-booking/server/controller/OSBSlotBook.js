@@ -136,7 +136,7 @@ async function bookASlot(From, To, fromTime, totime, Ground, Sports, Status, Boo
             obj.GroundName = Ground;
             obj.Sports = Sports;
             obj.Status = Status;
-            obj.BookBy = BookBy;
+            obj.BookBy = loginDetails;
             obj.isTournament = isTournament;
             obj.tournamentID = tournamentID;
             obj.totalPeople = totalPeople;
