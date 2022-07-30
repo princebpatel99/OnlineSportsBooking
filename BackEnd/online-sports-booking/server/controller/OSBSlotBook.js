@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
     if (loginDetails._id) {
         if (req.headers.authorization === process.env.Authorization) {
 
-            let result = await bookASlot(req.body.FromDate, req.body.ToDate, req.body.FromTime, req.body.ToTime, req.body.GroundName, req.body.Sports, req.body.Status, req.body.BookBy, req.body.isTournament, req.body.tournamentID, req.body.totalPeople, loginDetails)
+            let result = await bookASlot(req.body.FromDate, req.body.ToDate, req.body.FromTime, req.body.ToTime, req.body.GroundName, req.body.Sports, req.body.Status, req.body.BookBy, req.body.isTournament, req.body.tournamentID, req.body.totalPeople, loginDetails,req.body.Title,req.body.Description)
             res.send(result);
         }
         else {
@@ -69,18 +69,11 @@ router.put('/:id', async (req, res) => {
     if (loginDetails._id) {
         if (req.headers.authorization === process.env.Authorization) {
             var obj = {};
-            req.body.Date ? obj.Date = req.body.Date : false;
-            req.body.From ? obj.From = req.body.From : false;
-            req.body.To ? obj.To = req.body.To : false;
-            req.body.GroundName ? obj.GroundName = req.body.GroundName : false;
+            req.body.Title ? obj.Title = req.body.Title : false;
+            req.body.Description ? obj.Description = req.body.Description : false;
             req.body.Sports ? obj.Sports = req.body.Sports : false;
             req.body.Status ? obj.Status = req.body.Status : false;
-            req.body.BookBy ? obj.BookBy = req.body.BookBy : false;
-            req.body.isTournament ? obj.isTournament = req.body.isTournament : false;
-            req.body.tournamentID ? obj.tournamentID = req.body.tournamentID : false;
-            req.body.MatchId ? obj.MatchId = req.body.MatchId : false;
             req.body.totalPeople ? obj.totalPeople = req.body.totalPeople : false;
-
             obj.ModifiedBy = loginDetails;
             obj.Modified = new Date();
             OSBSlotBook.findByIdAndUpdate(req.params.id,
@@ -123,12 +116,14 @@ router.delete('/:id', (req, res) => {
     }
 });
 
-async function bookASlot(From, To, fromTime, totime, Ground, Sports, Status, BookBy, isTournament, tournamentID, totalPeople, loginDetails) {
+async function bookASlot(From, To, fromTime, totime, Ground, Sports, Status, BookBy, isTournament, tournamentID, totalPeople, loginDetails,title,Description) {
     return new Promise(async function (resolve, reject) {
 
         let slot = await checkIsAvailable(From, To, fromTime, totime, Ground);
         if (JSON.stringify(slot) === JSON.stringify({}) || slot) {
             var obj = new OSBSlotBook();
+            obj.Title = title;
+            obj.Description = Description;
             obj.FromDate = new Date(From);
             obj.ToDate = new Date(To);
             obj.FromTime = fromTime;
@@ -147,8 +142,9 @@ async function bookASlot(From, To, fromTime, totime, Ground, Sports, Status, Boo
 
             obj.save((err, doc) => {
                 if (!err) {
-                    // var json = JSON.stringify(doc);
-                    resolve(JSON.stringify({ isSuccess: true, message: "Successfully Booked a slot" }));
+                    doc["isSuccess"] = true;
+                    var json = JSON.stringify(doc);
+                    resolve(json);
                 }
                 else {
                     resolve(JSON.stringify({ isSuccess: false, message: err.toString() }));
@@ -162,11 +158,11 @@ async function bookASlot(From, To, fromTime, totime, Ground, Sports, Status, Boo
     });
 }
 function checkIsAvailable(FromDate, ToDate, fTime, tTime, Ground) {
-    
+
 
     return new Promise(function (resolve, reject) {
-        let filter = { $and: [{ FromDate: { $lte: new Date(FromDate) } }, { ToDate: { $gte: new Date(FromDate) } }, { GroundName: Ground }] }
-        let filter2 = { $and: [{ FromDate: { $lte: new Date(ToDate) } }, { ToDate: { $gte: new Date(ToDate) } }, { GroundName: Ground }] }
+        let filter = { $and: [{ FromDate: { $lte: new Date(FromDate) } }, { ToDate: { $gte: new Date(FromDate) } }, { GroundName: Ground }, { Status: "Active" }] }
+        let filter2 = { $and: [{ FromDate: { $lte: new Date(ToDate) } }, { ToDate: { $gte: new Date(ToDate) } }, { GroundName: Ground }, { Status: "Active" }] }
         let filterQuery = { $or: [filter, filter2] }
 
         try {
