@@ -5,7 +5,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Login from './Components/Login';
+import Register from './Components/Register';
 import Dashboard from './Admin/Dashboard';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -15,6 +17,7 @@ export default function Routing() {
       <Routes>
         <Route path="/" element={<App/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
       </Routes>
     </Router>

@@ -28,6 +28,10 @@ export function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+export function getAuth(){
+    return authToken;
+}
+
 
 function getCookie(cname) {
     let name = cname + "=";
