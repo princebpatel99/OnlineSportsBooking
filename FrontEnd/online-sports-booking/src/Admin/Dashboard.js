@@ -1,5 +1,5 @@
 import React from 'react';
-import LeftNavigation from './LeftNavigation';
+import LeftNavigation from '../Components/LeftNavigation';
 
 export default class Dashboard extends React.Component {
 
@@ -12,9 +12,9 @@ export default class Dashboard extends React.Component {
   
   render() {
     return (
-      <div className="App">
+      
         <LeftNavigation/>
-      </div>
+      
     );
   }
 }

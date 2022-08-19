@@ -4,6 +4,19 @@ const mongoose = require('mongoose');
 var nodemailer = require('nodemailer');
 var OSBAdmin = require('../model/OSBRegister');
 
+
+router.get('/authenticate/:id', (req, res) => {
+   
+    OSBAdmin.find({ _id: req.params.id }, function (error, data) {
+        if (!error) {
+            var obj = new OSBAdmin(data[0]);
+            obj.isVarified = true;
+            obj.save();
+            res.send('Email Verification is Successfull')
+        }
+    });
+});
+
 router.post('/verify/:id', (req, res) => {
     if (req.headers.authorization === process.env.Authorization) {
         OSBAdmin.find({ _id: req.params.id }, function (error, data) {
@@ -29,7 +42,7 @@ router.post('/verify/:id', (req, res) => {
                     to: toEmail, // list of receivers (who receives)
                     subject: 'Verify Your Email', // Subject line
                     text: 'Hello ' + fullName, // plaintext body
-                    html: '<br> Please verify your account by clicking on below link <br/> <a href="' + process.env.HostURL + '/sendEmail/authenticate/' + req.params.id + '">Verify Now</a>' // html body
+                    html: '<br> Please verify your account by clicking on below link <br/> <a href="' + process.env.HostURL + '/api/sendEmail/authenticate/' + req.params.id + '">Verify Now</a>' // html body
                 };
 
                 transporter.sendMail(mailOptions, function (err, info) {
@@ -56,15 +69,6 @@ router.post('/verify/:id', (req, res) => {
 });
 
 
-router.get('/authenticate/:id', (req, res) => {
-    OSBAdmin.find({ _id: req.params.id }, function (error, data) {
-        if (!error) {
-            var obj = new OSBAdmin(data[0]);
-            obj.isVarified = true;
-            obj.save();
-            res.send('Email Verification is Successfull')
-        }
-    });
-});
+
 
 module.exports = router;

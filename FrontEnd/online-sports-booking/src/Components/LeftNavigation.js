@@ -1,4 +1,11 @@
+import { FetchData, getAuth ,setCookie} from '../RestAPI/database';
 export default function LeftNavigation() {
+    
+    const logout = () =>{
+        setCookie("LoginUser",null,-1);
+        window.location.href = "/login";
+    }
+   
     return (
         <>
             <div className=" sidebar" role="navigation">
@@ -6,79 +13,33 @@ export default function LeftNavigation() {
                     <nav className="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
                         <ul className="nav" id="side-menu">
                             <li>
-                                <a href="index.html"><i className="fa fa-home nav_icon"></i>Dashboard</a>
+                                <a href="/dashboard"><i className="fa fa-home nav_icon"></i>Dashboard</a>
                             </li>
                             <li>
-                                <a href="#"><i className="fa fa-cogs nav_icon"></i>Components <span className="nav-badge">12</span> <span className="fa arrow"></span></a>
-                                <ul className="nav nav-second-level collapse">
-                                    <li>
-                                        <a href="grids.html">Grid System</a>
-                                    </li>
-                                    <li>
-                                        <a href="media.html">Media Objects</a>
-                                    </li>
-                                </ul>
-
+                                <a href="/inventory"><i className="fa fa-cogs nav_icon"></i>Add Inventory</a>
                             </li>
-                            <li className="">
-                                <a href="#"><i className="fa fa-book nav_icon"></i>UI Elements <span className="fa arrow"></span></a>
-                                <ul className="nav nav-second-level collapse">
-                                    <li>
-                                        <a href="general.html">General<span className="nav-badge-btm">08</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="typography.html">Typography</a>
-                                    </li>
-                                </ul>
+                            <li>
+                                <a href="/addSlot"><i className="fa fa-book nav_icon"></i>Add Slot</a>
+                            </li>
+                            <li>
+                                <a href="/inventory"><i className="fa fa-th-large nav_icon"></i>View Inventory</a>
+                            </li>
+                            <li>
+                            <a href="/seeSlots"><i className="fa fa-th-large nav_icon"></i>View Booking Slots</a>
 
                             </li>
                             <li>
-                                <a href="widgets.html"><i className="fa fa-th-large nav_icon"></i>Widgets <span className="nav-badge-btm">08</span></a>
+                                <a href="/addGame"><i className="fa fa-th-large nav_icon"></i>Add Game</a>
+                                
                             </li>
                             <li>
-                                <a href="#"><i className="fa fa-envelope nav_icon"></i>Mailbox<span className="fa arrow"></span></a>
-                                <ul className="nav nav-second-level collapse">
-                                    <li>
-                                        <a href="inbox.html">Inbox <span className="nav-badge-btm">05</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="compose.html">Compose email</a>
-                                    </li>
-                                </ul>
-
+                                <a href="/tournament"><i className="fa fa-check-square-o nav_icon"></i>Tournaments</a>
+                                
                             </li>
+                            
                             <li>
-                                <a href="tables.html"><i className="fa fa-table nav_icon"></i>Tables <span className="nav-badge">05</span></a>
-                            </li>
-                            <li>
-                                <a href="#"><i className="fa fa-check-square-o nav_icon"></i>Forms<span className="fa arrow"></span></a>
-                                <ul className="nav nav-second-level collapse">
-                                    <li>
-                                        <a href="forms.html">Basic Forms <span className="nav-badge-btm">07</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="validation.html">Validation</a>
-                                    </li>
-                                </ul>
-
-                            </li>
-                            <li>
-                                <a href="#"><i className="fa fa-file-text-o nav_icon"></i>Pages<span className="nav-badge-btm">02</span><span className="fa arrow"></span></a>
-                                <ul className="nav nav-second-level collapse">
-                                    <li>
-                                        <a href="login.html">Login</a>
-                                    </li>
-                                    <li>
-                                        <a href="signup.html">SignUp</a>
-                                    </li>
-                                    <li>
-                                        <a href="blank-page.html">Blank Page</a>
-                                    </li>
-                                </ul>
-
-                            </li>
-                            <li>
-                                <a href="charts.html" className="chart-nav"><i className="fa fa-bar-chart nav_icon"></i>Charts <span className="nav-badge-btm pull-right">new</span></a>
+                                <a href="#" onClick={()=>{logout()}}><i className="fa fa-check-square-o nav_icon"></i>Log out</a>
+                                
                             </li>
                         </ul>
                         <div className="clearfix"> </div>
@@ -90,25 +51,16 @@ export default function LeftNavigation() {
             <div className="sticky-header header-section ">
                 <div className="header-left">
 
-                    <button id="showLeftPush"><i className="fa fa-bars"></i></button>
+                    {/* <button id="showLeftPush"><i className="fa fa-bars"></i></button> */}
 
                     <div className="logo">
                         <a href="index.html">
-                            <h1>NOVUS</h1>
-                            <span>AdminPanel</span>
+                            <h1>Sports</h1>
+                            <span>My Sports Club</span>
                         </a>
                     </div>
 
-                    <div className="search-box">
-                        <form className="input">
-                            <input className="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
-                            <label className="input__label">
-                                <svg className="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
-                                    <path d="m0,0l404,0l0,77l-404,0l0,-77z" />
-                                </svg>
-                            </label>
-                        </form>
-                    </div>
+                    
                     <div className="clearfix"> </div>
                 </div>
                 <div className="header-right">
@@ -252,7 +204,7 @@ export default function LeftNavigation() {
                             <li className="dropdown profile_details_drop">
                                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                     <div className="profile_img">
-                                        <span className="prfil-img"><img src="images/a.png" alt="" /> </span>
+                                        <span className="prfil-img"><img style={{width:'50px'}} src="https://cdn1.iconfinder.com/data/icons/app-user-interface-glyph/64/user_man_user_interface_app_person-512.png" alt="" /> </span>
                                         <div className="user-name">
                                             <p>Wikolia</p>
                                             <span>Administrator</span>

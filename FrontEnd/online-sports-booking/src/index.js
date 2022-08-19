@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import Login from './Components/Login';
 import Register from './Components/Register';
 import Dashboard from './Admin/Dashboard';
+import Booking from './Components/Booking';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,6 +20,7 @@ export default function Routing() {
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/addSlot" element={<Booking/>} />
       </Routes>
     </Router>
   );
