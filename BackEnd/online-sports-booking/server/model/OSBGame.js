@@ -13,7 +13,7 @@ var schema = new mongoose.Schema({
     Created:Date,
     ModifiedBy:Object,
     Modified:Date
-})
+});
 
 const OBSGame = db.model('OBSGame', schema);
 
